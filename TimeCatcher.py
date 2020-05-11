@@ -23,8 +23,8 @@ if(len(sy.argv)==2 and (str(sy.argv[1])=="start" or str(sy.argv[1])=="stop")):
     dados += time.strftime("%H")        #
     dados += ":"                        #
     dados += time.strftime("%M")        #
-    dados += '"'                        #
-    dados += time.strftime("%S")        #
+    # dados += '"'                      #
+    # dados += time.strftime("%S")      #
     usuario = str(os.getlogin()) # Recebe o usuário que fez login.
     host_name = str(sk.gethostname()) # Recebe o nome do computador que está sendo usado.
     row = [usuario,dados,host_name] 
