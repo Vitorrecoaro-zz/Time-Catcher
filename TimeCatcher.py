@@ -43,27 +43,29 @@ if(len(sy.argv)==2 and (str(sy.argv[1])=="start" or str(sy.argv[1])=="stop")):
                     row.append("Logout")
                     writer.writerow(row)
 elif(len(sy.argv)==3 and (str(sy.argv[1])=="start" or str(sy.argv[1])=="stop")):
-    mode = 1 
-    time = dt.datetime.now() # Recebe as horas atuais do CPU.
-    dados = ""                          # Formata os dados de tempo recebido  na exibição brasileira
-    dados += time.strftime("%d")        #
-    dados += "/"                        #
-    dados += time.strftime("%m")        #
-    dados += "/"                        #
-    dados += time.strftime("%Y")        #
-    dados += " "                        #       
-    dados += time.strftime("%H")        #
-    dados += ":"                        #
-    dados += time.strftime("%M")        #
-    # dados += '"'                      #
-    # dados += time.strftime("%S")      #
-    usuario = str(os.getlogin()) # Recebe o usuário que fez login.
-    host_name = str(sk.gethostname()) # Recebe o nome do computador que está sendo usado.
     path = str(sy.argv[2])
     mainMemory = str(path[0:2])
     if(os.path.isdir(mainMemory)==False):
-            input("Invalid destination of file\nPress ENTER to exit")
+        input("Invalid destination of file\nPress ENTER to exit")
     else:
+        mode = 1 
+        time = dt.datetime.now() # Recebe as horas atuais do CPU.
+        dados = ""                          # Formata os dados de tempo recebido  na exibição brasileira
+        dados += time.strftime("%d")        #
+        dados += "/"                        #
+        dados += time.strftime("%m")        #
+        dados += "/"                        #
+        dados += time.strftime("%Y")        #
+        dados += " "                        #       
+        dados += time.strftime("%H")        #
+        dados += ":"                        #
+        dados += time.strftime("%M")        #
+        # dados += '"'                      #
+        # dados += time.strftime("%S")      #
+        usuario = str(os.getlogin()) # Recebe o usuário que fez login.
+        host_name = str(sk.gethostname()) # Recebe o nome do computador que está sendo usado.
+        path = str(sy.argv[2])
+        mainMemory = str(path[0:2])
         if(os.path.isdir(path)==False):
                 os.mkdir(path)
         row = [usuario,dados,host_name] 
