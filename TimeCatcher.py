@@ -43,8 +43,9 @@ if(len(sy.argv)==2 and (str(sy.argv[1])=="start" or str(sy.argv[1])=="stop")):
                     row.append("Logout")
                     writer.writerow(row)
 elif(len(sy.argv)==3 and (str(sy.argv[1])=="start" or str(sy.argv[1])=="stop")):
-    path = str(sy.argv[2])
-    mainMemory = str(path[0:2])
+    path = str(sy.argv[2])                  # Pega o diretório que será guardado o .csv
+    firstBar = path.index("\\")             # Pega o diretório principal
+    mainMemory = str(path[0:firstBar])      #
     if(os.path.isdir(mainMemory)==False):
         input("Invalid destination of file\nPress ENTER to exit")
     else:
@@ -64,10 +65,8 @@ elif(len(sy.argv)==3 and (str(sy.argv[1])=="start" or str(sy.argv[1])=="stop")):
         # dados += time.strftime("%S")      #
         usuario = str(os.getlogin()) # Recebe o usuário que fez login.
         host_name = str(sk.gethostname()) # Recebe o nome do computador que está sendo usado.
-        path = str(sy.argv[2])
-        mainMemory = str(path[0:2])
         if(os.path.isdir(path)==False):
-                os.mkdir(path)
+                os.makedirs(path)         # Cria todas pastas que foram passadas como argumento
         row = [usuario,dados,host_name] 
         if(os.path.isdir(path+"\\TimeLogs")==False): #Testa se a pasta TimeLogs, existe. Caso não, cria a pasta.
                 os.mkdir(path+"\\TimeLogs")
