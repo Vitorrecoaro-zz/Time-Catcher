@@ -55,23 +55,20 @@ else:
         else:
                 firstBar = path.index("\\")             # Pega o diretório principal
                 mainMemory = str(path[0:firstBar])      #
-                if(os.path.isdir(mainMemory)==False):
-                        input("Invalid destination of file\nPress ENTER to exit")
-                else:
-                        if(os.path.isdir(path)==False):
-                                os.makedirs(path)         # Cria todas pastas que foram passadas como argumento
-                        row = [usuario,dados,host_name] 
-                        if(os.path.isdir(path+"\\TimeLogs")==False): #Testa se a pasta TimeLogs, existe. Caso não, cria a pasta.
-                                os.mkdir(path+"\\TimeLogs")
-                        if(os.path.isfile(path+"\\TimeLogs\\"+usuario+"_Log.csv")==False): #Testa se o arquivo "csv" existe, se não ele será criado com o cabeçalho.
-                                mode = 0
-                        with open(path+"\\TimeLogs\\"+usuario+"_Log.csv",'a', newline='') as file: #Abre o arquivo "csv", caso não exista ele cria e adiciona em linhas abaixo dele.
-                                writer = csv.writer(file)
-                                if(mode==0):
-                                        writer.writerow([("User"),("Time"),("Host"),("Event")])
-                                if(operation=="start"):
-                                        row.append("Login")
-                                        writer.writerow(row)
-                                elif(operation=="stop"):
-                                        row.append("Logout")
-                                        writer.writerow(row)
+                if(os.path.isdir(path)==False):
+                        os.makedirs(path)         # Cria todas pastas que foram passadas como argumento
+                row = [usuario,dados,host_name] 
+                if(os.path.isdir(path+"\\TimeLogs")==False): #Testa se a pasta TimeLogs, existe. Caso não, cria a pasta.
+                        os.mkdir(path+"\\TimeLogs")
+                if(os.path.isfile(path+"\\TimeLogs\\"+usuario+"_Log.csv")==False): #Testa se o arquivo "csv" existe, se não ele será criado com o cabeçalho.
+                        mode = 0
+                with open(path+"\\TimeLogs\\"+usuario+"_Log.csv",'a', newline='') as file: #Abre o arquivo "csv", caso não exista ele cria e adiciona em linhas abaixo dele.
+                        writer = csv.writer(file)
+                        if(mode==0):
+                                writer.writerow([("User"),("Time"),("Host"),("Event")])
+                        if(operation=="start"):
+                                row.append("Login")
+                                writer.writerow(row)
+                        elif(operation=="stop"):
+                                row.append("Logout")
+                                writer.writerow(row)
