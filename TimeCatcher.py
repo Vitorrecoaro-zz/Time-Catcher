@@ -4,7 +4,7 @@
 # Data: 30/04/2020.
 # Novas funcionalidade: Pega o hostname da máquina, cria um arquivo no formato csv, passado um argumento para o programa para fazer o logon ou logoff num mesmo arquivo.
 # Mensagem de erro, caso não seja passado argumentos corretos, salva os Logs na memória principal na pasta TimeLogs, um argumento para onde será salvo a pasta TimeLogs
-# O caminho do diretório e o argumento de parada será utilizado da seguinte forma "stop*C:\Exemple...\".
+# O caminho do diretório e o argumento de parada será utilizado da seguinte forma "stop*C:/Exemple.../".
 
 import datetime as dt
 import os
@@ -36,6 +36,7 @@ else:
         host_name = str(sk.gethostname())   # Recebe o nome do computador que está sendo usado.
         row = [usuario,dados,host_name]
         path = arg[firstStar:]              # Pega o diretório que será guardado o .csv
+        path = path.replace("/","\\")
         if(len(path)==0): 
                 if(os.path.isdir("\\TimeLogs")==False): #Testa se a pasta TimeLogs, existe. Caso não, cria a pasta.
                         os.mkdir("\\TimeLogs")
