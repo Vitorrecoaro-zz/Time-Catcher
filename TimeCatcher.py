@@ -4,20 +4,16 @@
 # Data: 30/04/2020.
 # Novas funcionalidade: Pega o hostname da máquina, cria um arquivo no formato csv, passado um argumento para o programa para fazer o logon ou logoff num mesmo arquivo.
 # Mensagem de erro, caso não seja passado argumentos corretos, salva os Logs na memória principal na pasta TimeLogs, um argumento para onde será salvo a pasta TimeLogs
-# O caminho do diretório e o argumento de parada será utilizado da seguinte forma "stop*C:/Exemple.../".
 
 import datetime as dt
 import os
 import socket as sk 
 import csv
 import sys as sy
-if len(sy.argv)!=2:
+if len(sy.argv)<2:
         input("Invalid Argument\nPress ENTER to exit.")
 else:
-        arg = str(sy.argv[1])
-        firstStar = arg.index("*")
-        operation = arg[0:firstStar]
-        firstStar += 1
+        operation = str(sy.argv[1])
         mode = 1 
         time = dt.datetime.now()            # Recebe as horas atuais do CPU.
         dados = ""                          # Formata os dados de tempo recebido  na exibição brasileira
@@ -35,9 +31,7 @@ else:
         usuario = str(os.getlogin())        # Recebe o usuário que fez login.
         host_name = str(sk.gethostname())   # Recebe o nome do computador que está sendo usado.
         row = [usuario,dados,host_name]
-        path = arg[firstStar:]              # Pega o diretório que será guardado o .csv
-        path = path.replace("/","\\")
-        if(len(path)==0): 
+        if(len(sy.argv)==2): 
                 if(os.path.isdir("\\TimeLogs")==False): #Testa se a pasta TimeLogs, existe. Caso não, cria a pasta.
                         os.mkdir("\\TimeLogs")
                 if(os.path.isfile("\\TimeLogs\\"+usuario+"_Log.csv")==False): #Testa se o arquivo "csv" existe, se não ele será criado com o cabeçalho.
@@ -53,8 +47,8 @@ else:
                                 row.append("Logout")
                                 writer.writerow(row)
         else:
-                firstBar = path.index("\\")             # Pega o diretório principal
-                mainMemory = str(path[0:firstBar])      #
+                path = str(sy.argv[2])
+                path = path.replace("/","\\")
                 if(os.path.isdir(path)==False):
                         os.makedirs(path)         # Cria todas pastas que foram passadas como argumento
                 row = [usuario,dados,host_name] 
